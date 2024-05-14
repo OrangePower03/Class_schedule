@@ -45,6 +45,7 @@ public class SQLUtils {
         String UPDATE_SQL = "update course set teacher_name=?, course_name=?, week_schedule=?, classroom=? where section=? and week=?";
         try(Connection connection = getConnection();
             PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_SQL)) {
+
             preparedStatement.setString(1, course.getCourse().getTeacherName());
             preparedStatement.setString(2, course.getCourse().getCourseName());
             preparedStatement.setString(3, course.getCourse().getWeekSchedule());

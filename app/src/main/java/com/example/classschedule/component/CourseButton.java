@@ -22,8 +22,8 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CourseButton extends AppCompatButton {
-    private int section;
-    private int week;
+    private final int section;
+    private final int week;
     private Course course;
 
     public CourseButton(Context context) {
@@ -36,16 +36,10 @@ public class CourseButton extends AppCompatButton {
 
     public CourseButton(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        init(attrs, defStyleAttr);
-    }
-
-    private void init(AttributeSet attrs, int defStyleAttr) {
-        if (attrs != null) {
-            TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CourseButton, defStyleAttr, 0);
-            section = typedArray.getInt(R.styleable.CourseButton_section, 0);
-            week = typedArray.getInt(R.styleable.CourseButton_week, 0);
-            typedArray.recycle();
-        }
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.CourseButton, defStyleAttr, 0);
+        section = typedArray.getInt(R.styleable.CourseButton_section, 0);
+        week = typedArray.getInt(R.styleable.CourseButton_week, 0);
+        typedArray.recycle();
         this.course = SQLUtils.select(section, week);
 
         updateText();
